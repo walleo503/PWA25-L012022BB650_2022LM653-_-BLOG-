@@ -1,4 +1,5 @@
-﻿using Laboratorio.Models;
+﻿using L01_2022BB650_2022LM653;
+using Laboratorio.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -9,9 +10,9 @@ namespace Laboratorio.Controllers
     [ApiController]
     public class UsuariosController1 : ControllerBase
     {
-        private readonly _UsuariosContexto _context;
+        private readonly DatosContext _context;
 
-        public UsuariosController1(_UsuariosContexto context)
+        public UsuariosController1(DatosContext context)
         {
             _context = context;
         }
@@ -24,10 +25,10 @@ namespace Laboratorio.Controllers
         public IActionResult Get()
         {
             //var usuarios = _context.Usuarios.Include(u => u.Rol).ToList();
-            List<Usuarios> listadoUsuarios = (from e in _UsuariosContexto.equipos
+            List<Usuarios> listadoUsuarios = (from e in _context.Usuarios
                                            select e).ToList();
 
-            if (usuarios.Count == 0)
+            if (listadoUsuarios.Count == 0)
             {
                 return NotFound();
             }

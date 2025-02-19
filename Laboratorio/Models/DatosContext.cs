@@ -1,4 +1,5 @@
 ﻿using L01_2022BB650_2022LM653.Models;
+using Laboratorio.Models;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.SqlServer;
