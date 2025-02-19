@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿
 using Microsoft.AspNetCore.Mvc;
 using L01_2022BB650_2022LM653.Models;
 using Microsoft.EntityFrameworkCore;
@@ -82,8 +82,8 @@ namespace L01_2022BB650_2022LM653.Controllers
         {
             // Verificación de usuario válido
             var usuario = _PublicacionesContexto.Usuarios
-                            .Where(u => u.UsuarioId== usuarioId)
-                            .Select(u => new { u.UsuarioId, u.NombreUsuario })
+                            .Where(u => u.usuarioId== usuarioId)
+                            .Select(u => new { u.usuarioId, u.nombreUsuario })
                             .FirstOrDefault();
 
             if (usuario == null)
@@ -99,15 +99,14 @@ namespace L01_2022BB650_2022LM653.Controllers
                                             p.publicacionId,
                                             p.titulo,
                                             p.descripcion,
-                                            UsuarioId = usuario.UsuarioId,
-                                            NombreUsuario = usuario.NombreUsuario
+                                            NombreUsuario = usuario.nombreUsuario
                                         })
                                         .ToList();
 
             // Validar si se encontraron publicaciones
             if (!publicacionesEncontradas.Any())
             {
-                return NotFound($"No se encontraron publicaciones para el usuario '{usuario.NombreUsuario}'.");
+                return NotFound($"No se encontraron publicaciones para el usuario '{usuario.nombreUsuario}'.");
             }
 
             return Ok(publicacionesEncontradas);
