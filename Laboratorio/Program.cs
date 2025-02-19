@@ -1,6 +1,19 @@
+using L01_2022BB650_2022LM653;
+using L01_2022BB650_2022LM653.Models;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
+builder.Services.AddControllers();
+
+//Inyecion por dependencia
+builder.Services.AddDbContext<DatosContext>(options => options.UseSqlServer(
+    builder.Configuration.GetConnectionString("DatosDbConnectionSS") )
+);
+
+
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
