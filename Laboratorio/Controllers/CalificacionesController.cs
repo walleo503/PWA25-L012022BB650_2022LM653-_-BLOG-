@@ -9,5 +9,14 @@ namespace L01_2022BB650_2022LM653.Controllers
     [ApiController]
     public class CalificacionesController : ControllerBase
     {
+        private readonly DatosContext _CalificacionesContexto;
+
+        public CalificacionesController(DatosContext CalificacionesContexto) { 
+        
+            _CalificacionesContexto = CalificacionesContexto;
+        }
+
+   
+
     }
 }

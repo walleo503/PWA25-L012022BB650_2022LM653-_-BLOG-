@@ -9,10 +9,10 @@ namespace L01_2022BB650_2022LM653.Controllers
     [ApiController]
     public class PublicacionesController : ControllerBase
     {
-        private readonly DatosContext _PublicacionContexto;
+        private readonly DatosContext _PublicacionesContexto;
         public PublicacionesController (DatosContext PublicacionesContexto)
         {
-            _PublicacionContexto = PublicacionesContexto;
+            _PublicacionesContexto = PublicacionesContexto;
         }
 
         //Enpoint que retorna el listado de todas las publicaciones existentes
@@ -20,7 +20,7 @@ namespace L01_2022BB650_2022LM653.Controllers
         [Route("GetAll")]
         public IActionResult Get()
         {
-            List<Publicaciones> listadoPublicaciones = (from e in _PublicacionContexto.Publicaciones
+            List<Publicaciones> listadoPublicaciones = (from e in _PublicacionesContexto.Publicaciones
                                         select e).ToList();
 
             if (listadoPublicaciones.Count() == 0)
@@ -39,8 +39,8 @@ namespace L01_2022BB650_2022LM653.Controllers
         {
             try
             {
-                _PublicacionContexto.Publicaciones.Add(Publicaciones);
-                _PublicacionContexto.SaveChanges();
+                _PublicacionesContexto.Publicaciones.Add(Publicaciones);
+                _PublicacionesContexto.SaveChanges();
                 return Ok(Publicaciones);
             }
             catch (Exception ex)
@@ -56,7 +56,7 @@ namespace L01_2022BB650_2022LM653.Controllers
         public IActionResult ActualizarPublicacion(int id, [FromBody] Publicaciones PublicacionModificado)
         {
             //Escojer un registro existente de la base de datos.
-            Publicaciones? PublicacionActual = (from e in _PublicacionContexto.Publicaciones
+            Publicaciones? PublicacionActual = (from e in _PublicacionesContexto.Publicaciones
                                   where e.publicacionId == id
                                   select e).FirstOrDefault();
             //Verificacion de la existencia del registro.
@@ -68,23 +68,20 @@ namespace L01_2022BB650_2022LM653.Controllers
             PublicacionActual.descripcion = PublicacionModificado.descripcion;
 
             //Marcado de registro modificado.
-            _PublicacionContexto.Entry(PublicacionActual).State = EntityState.Modified;
-            _PublicacionContexto.SaveChanges();
+            _PublicacionesContexto.Entry(PublicacionActual).State = EntityState.Modified;
+            _PublicacionesContexto.SaveChanges();
             return Ok(PublicacionModificado);
         }
 
 
-        /// <summary>
-        /// Buscador de publicaciones por el  ID de usuario.
-        /// </summary>
+        /// Buscador de publicaciones por el  Id de usuario.
         /// <param name="usuarioId"></param>
-        /// <returns></returns>
         [HttpGet]
         [Route("BuscarPorUsuarioId/{usuarioId}")]
         public IActionResult BuscarPublicacionesPorUsuarioId(int usuarioId)
         {
             // Verificación de usuario válido
-            var usuario = _PublicacionContexto.Usuarios
+            var usuario = _PublicacionesContexto.Usuarios
                             .Where(u => u.usuarioId== usuarioId)
                             .Select(u => new { u.usuarioId, u.nombreUsuario })
                             .FirstOrDefault();
@@ -95,7 +92,7 @@ namespace L01_2022BB650_2022LM653.Controllers
             }
 
             // Obtener publicaciones del usuario filtrando por ID
-            var publicacionesEncontradas = _PublicacionContexto.Publicaciones
+            var publicacionesEncontradas = _PublicacionesContexto.Publicaciones
                                         .Where(p => p.usuarioId == usuarioId)
                                         .Select(p => new
                                         {
@@ -115,6 +112,7 @@ namespace L01_2022BB650_2022LM653.Controllers
 
             return Ok(publicacionesEncontradas);
         }
+
 
     }
 
