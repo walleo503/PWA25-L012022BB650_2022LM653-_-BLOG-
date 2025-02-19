@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using L01_2022BB650_2022LM653.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Laboratorio.Models;
 
 namespace L01_2022BB650_2022LM653.Properties
 {

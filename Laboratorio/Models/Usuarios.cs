@@ -1,6 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using L01_2022BB650_2022LM653.Models;
 
-namespace L01_2022BB650_2022LM653.Models
+namespace Laboratorio.Models
 {
 
     public class Usuarios
