@@ -1,10 +1,8 @@
-﻿using L01_2022BB650_2022LM653.Models;
-using Microsoft.Data.SqlClient;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.SqlServer;
 
 
-namespace L01_2022BB650_2022LM653
+namespace L01_2022BB650_2022LM653.Models
 {
     public class DatosContext : DbContext
     {

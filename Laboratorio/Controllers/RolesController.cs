@@ -9,6 +9,6 @@ namespace Laboratorio.Controllers
     [ApiController]
     public class RolesController : ControllerBase
     {
-
+       
     }
 }
