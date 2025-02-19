@@ -63,18 +63,18 @@ namespace L01_2022BB650_2022LM653.Properties
         [Route("actualizar/{id}")]
         public IActionResult ActualizarUsuario(int id, [FromBody] Usuarios usuarioModificar)
         {
-            var usuarioActual = _context.Usuarios.FirstOrDefault(u => u.UsuarioId == id);
+            var usuarioActual = _context.Usuarios.FirstOrDefault(u => u.usuarioId == id);
 
             if (usuarioActual == null)
             {
                 return NotFound();
             }
 
-            usuarioActual.NombreUsuario = usuarioModificar.NombreUsuario;
-            usuarioActual.Clave = usuarioModificar.Clave;
-            usuarioActual.Nombre = usuarioModificar.Nombre;
-            usuarioActual.Apellido = usuarioModificar.Apellido;
-            usuarioActual.RolId = usuarioModificar.RolId;
+            usuarioActual.nombreUsuario = usuarioModificar.nombreUsuario;
+            usuarioActual.clave = usuarioModificar.clave;
+            usuarioActual.nombre = usuarioModificar.nombre;
+            usuarioActual.apellido = usuarioModificar.apellido;
+            usuarioActual.rolId = usuarioModificar.rolId;
 
             _context.Entry(usuarioActual).State = EntityState.Modified;
             _context.SaveChanges();
@@ -89,7 +89,7 @@ namespace L01_2022BB650_2022LM653.Properties
         [Route("eliminar/{id}")]
         public IActionResult EliminarUsuario(int id)
         {
-            var usuario = _context.Usuarios.FirstOrDefault(u => u.UsuarioId == id);
+            var usuario = _context.Usuarios.FirstOrDefault(u => u.usuarioId == id);
 
             if (usuario == null)
             {
@@ -110,7 +110,7 @@ namespace L01_2022BB650_2022LM653.Properties
         public IActionResult FiltrarPorNombreApellido([FromQuery] string nombre, [FromQuery] string apellido)
         {
             var usuarios = _context.Usuarios
-                .Where(u => u.Nombre.Contains(nombre) || u.Apellido.Contains(apellido))
+                .Where(u => u.nombre.Contains(nombre) || u.apellido.Contains(apellido))
                 .ToList();
 
             if (usuarios.Count == 0)
@@ -129,7 +129,7 @@ namespace L01_2022BB650_2022LM653.Properties
         public IActionResult FiltrarPorRol(int rolId)
         {
             var usuarios = _context.Usuarios
-                .Where(u => u.RolId == rolId)
+                .Where(u => u.rolId == rolId)
                 .Include(u => u.Rol)
                 .ToList();
 
