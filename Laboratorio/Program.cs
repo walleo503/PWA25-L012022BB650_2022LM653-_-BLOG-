@@ -1,3 +1,5 @@
+using L01_2022BB650_2022LM653;
+using L01_2022BB650_2022LM653.Models;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -5,10 +7,11 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllers();
+
 //Inyecion por dependencia
-builder.Services.AddDbContext<>(
-    options => options.UseSqlServer (builder.Configuration.GetConnectionString("")) 
-    );
+builder.Services.AddDbContext<DatosContext>(options => options.UseSqlServer(
+    builder.Configuration.GetConnectionString("DatosDbConnectionSS") )
+);
 
 
 
