@@ -6,8 +6,8 @@ namespace L01_2022BB650_2022LM653.Models
     {
         [Key]
         public int comentarioId { get; set; }
-        public int? publicacionesId { get; set; }
-        public string comentario {  get; set; }
+        public int? publicacionId { get; set; }
         public int? usuarioId { get; set; }
+        public string comentario { get; set; }
     }
 }

@@ -28,6 +28,7 @@ namespace L01_2022BB650_2022LM653.Controllers
         public IActionResult Get()
         {
             var comentarios = _context.Comentarios.ToList();
+
             if (comentarios.Count == 0)
             {
                 return NotFound();
@@ -68,7 +69,7 @@ namespace L01_2022BB650_2022LM653.Controllers
                 return NotFound();
             }
 
-            comentarioActual.publicacionesId = comentarioModificar.publicacionesId;
+            comentarioActual.publicacionId = comentarioModificar.publicacionId;
             comentarioActual.comentario = comentarioModificar.comentario;
             comentarioActual.usuarioId = comentarioModificar.usuarioId;
 
@@ -105,7 +106,7 @@ namespace L01_2022BB650_2022LM653.Controllers
         public IActionResult ObtenerComentariosPorPublicacion(int publicacionId)
         {
             var comentario = _context.Comentarios
-                .Where(c => c.publicacionesId == publicacionId)
+                .Where(c => c.publicacionId == publicacionId)
                 .ToList();
 
             if (comentario.Count == 0)
